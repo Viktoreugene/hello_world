@@ -39,12 +39,7 @@ workflows:
     jobs:
       - say-hello
       - print_hello
-<<<<<<< HEAD
       - print_world:
-          requires: 
-=======
-      - print_world
           requires:
->>>>>>> 29557bd5df74f0b9e8fe9411a579e68cbd12673a
             - print_hello
 
