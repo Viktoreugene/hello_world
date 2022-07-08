@@ -22,14 +22,14 @@ jobs:
       - image: circleci/node:13.8.0
     
     steps:
-      - run echo "Hello"
+      - run: echo "Hello"
 
   print_world:
     docker:
       - image: circleci/node:13.8.0
     
     steps:
-      - run echo "World"
+      - run: echo "World"
 
 
 # Invoke jobs via workflows
