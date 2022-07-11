@@ -16,6 +16,12 @@ jobs:
     steps:
       - run: echo world
 
+  print_alias:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo $my_alias_name
+
 workflows:
   welcome:
     jobs:
@@ -23,3 +29,6 @@ workflows:
       - print_world:
           requires:
             - print_hello
+      - print_alias:
+          requires:
+            - print_world
