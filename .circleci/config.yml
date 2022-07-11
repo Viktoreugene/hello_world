@@ -22,6 +22,14 @@ jobs:
     steps:
       - run: echo $my_alias_name
 
+  create_env_var:
+    docker:
+      - image: circleci/node:13.8.0
+    environment:
+      FOO: bar
+    steps:
+      - run: echo $FOO
+
 workflows:
   welcome:
     jobs:
@@ -32,3 +40,4 @@ workflows:
       - print_alias:
           requires:
             - print_world
+      - print_env_var
