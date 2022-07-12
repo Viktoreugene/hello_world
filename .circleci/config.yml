@@ -4,40 +4,28 @@ orbs:
   welcome: circleci/welcome-orb@0.4.1
 
 jobs:
-  print_hello:
+  save_hello_world_output:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo hello
+      - run: echo "hello world" > output.txt
+      - persist_to_workspace:
+          root: .
+          paths:
+            - builds/*
 
-  print_world:
+  print_output_file:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo world
-
-  print_alias:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run: echo $my_alias_name
-
-  create_env_var:
-    docker:
-      - image: circleci/node:13.8.0
-    environment:
-      FOO: bar
-    steps:
-      - run: echo $FOO
+      - attach_to_workspace:
+          at: ./
+      - run: cat output.txt
 
 workflows:
   welcome:
     jobs:
-      - print_hello
-      - print_world:
+      - save_hello_world_output
+      - print_output_file:
           requires:
-            - print_hello
-      - print_alias:
-          requires:
-            - print_world
-      - create_env_var
+            save_hello_world_output
