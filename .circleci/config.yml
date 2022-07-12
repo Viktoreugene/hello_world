@@ -1,32 +1,29 @@
 version: 2.1
 
+commands:
+  print_pl_id:
+    description: "As sample command in CI"
+    parameters:
+      to:
+        type: string
+        default: $CIRCLECI_WORKFLOW_ID
+    steps:
+      - run: echo "The circleci id is << parameters.to >>"
+
 orbs:
   welcome: circleci/welcome-orb@0.4.1
 
 jobs:
-  save_hello_world_output:
+  run_command:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "hello world" > ~/output.txt
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - output.txt
+      - print_pl_id
 
-  print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: cat ~/output.txt
 
 workflows:
   welcome:
     jobs:
-      - save_hello_world_output
-      - print_output_file:
-          requires:
-            - save_hello_world_output
+      - run_command
+      
           
