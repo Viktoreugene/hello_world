@@ -3,9 +3,6 @@ version: 2.1
 commands:
   print_pl_id:
     description: "As sample command in CI"
-    parameters:
-      to:
-        type: string
     steps:
       - run: echo ${CIRCLECI_WORKFLOW_ID}
 
