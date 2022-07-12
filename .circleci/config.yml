@@ -25,7 +25,7 @@ jobs:
     steps:
       - checkout
       - attach_to_workspace:
-          at: ~/hello_world
+          at: ~/hello_world/builds/
       - run: cat output.txt
 
 workflows:
