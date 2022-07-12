@@ -6,9 +6,8 @@ commands:
     parameters:
       to:
         type: string
-        default: $CIRCLECI_WORKFLOW_ID
     steps:
-      - run: echo "The circleci id is << parameters.to >>"
+      - run: echo ${CIRCLECI_WORKFLOW_ID}
 
 orbs:
   welcome: circleci/welcome-orb@0.4.1
