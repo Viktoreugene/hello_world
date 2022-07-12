@@ -5,21 +5,27 @@ orbs:
 
 jobs:
   save_hello_world_output:
+    working_directory: ~/hello_world
     docker:
       - image: circleci/node:13.8.0
     steps:
+      - checkout
+      - attach-workspace:
+          at: ~/hello_world
       - run: echo "hello world" > output.txt
       - persist_to_workspace:
-          root: .
+          root: ~/hello_world
           paths:
             - builds/*
 
   print_output_file:
+    working_directory: ~/hello_world
     docker:
       - image: circleci/node:13.8.0
     steps:
+      - checkout
       - attach_to_workspace:
-          at: ./
+          at: ~/hello_world
       - run: cat output.txt
 
 workflows:
